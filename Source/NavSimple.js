@@ -36,6 +36,7 @@ var NavSimple = new Class({
     keyboardNav: true,
     keyboardNavEsc: true,
     keyboardNavSpace: true,
+    keyboardNavArrows: false,
     keyboardNavNumbers: true,
     doInitialScroll: false,
     markReadDelay: 5000,
@@ -138,7 +139,14 @@ var NavSimple = new Class({
           'shift+space' : function(e) { e.preventDefault(); this.previousSection(); }.bind(this)   
         });
       }
-      
+
+      if (this.options.keyboardNavArrows){
+        this.keyboard.addEvents({
+          'down': function(e) { e.preventDefault(); this.nextSection(); }.bind(this),
+          'up'  : function(e) { e.preventDefault(); this.previousSection(); }.bind(this)
+        });
+      }
+
       if (this.options.keyboardNavEsc)
         this.keyboard.addEvent('esc', this.toSection.pass(0, this));
       
